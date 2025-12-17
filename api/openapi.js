@@ -4,13 +4,22 @@ module.exports = function handler(req, res) {
     return res.end("Method Not Allowed");
   }
 
+  const proto =
+    (req.headers["x-forwarded-proto"] && String(req.headers["x-forwarded-proto"]).split(",")[0].trim()) ||
+    "https";
+  const host =
+    (req.headers["x-forwarded-host"] && String(req.headers["x-forwarded-host"]).split(",")[0].trim()) ||
+    (req.headers["host"] ? String(req.headers["host"]).trim() : "");
+
+  const baseUrl = host ? `${proto}://${host}` : "https://YOUR_VERCEL_DOMAIN";
+
   // OpenAPI YAML (served at /openapi.yaml via vercel.json rewrite)
   const yaml = `openapi: 3.0.3
 info:
   title: NoteGenerator Commit API
   version: 1.0.0
 servers:
-  - url: https://YOUR_VERCEL_DOMAIN
+  - url: ${baseUrl}
 paths:
   /articles:
     post:
