@@ -11,10 +11,9 @@ module.exports = function handler(req, res) {
     (req.headers["x-forwarded-host"] && String(req.headers["x-forwarded-host"]).split(",")[0].trim()) ||
     (req.headers["host"] ? String(req.headers["host"]).trim() : "");
 
-  const baseUrl = host ? `${proto}://${host}` : "https://YOUR_VERCEL_DOMAIN";
+  const baseUrl = host ? `${proto}://${host}` : "https://notegen-gpts-j8y1sxjzt-maogons-projects.vercel.app";
 
-  // OpenAPI YAML (served at /openapi.yaml via vercel.json rewrite)
-  const yaml = `openapi: 3.0.3
+  const yaml = `openapi: 3.1.0
 info:
   title: NoteGenerator Commit API
   version: 1.0.0
@@ -32,36 +31,46 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required: [title, content]
-              properties:
-                title:
-                  type: string
-                  description: Article title
-                content:
-                  type: string
-                  description: Markdown content (UTF-8)
-                slug:
-                  type: string
-                  description: Optional filename slug (fallback: derived from title)
-                yyyymmdd:
-                  type: string
-                  description: Optional date prefix like 20251217 (fallback: UTC today)
-                commit_message:
-                  type: string
-                  description: Optional commit message
+              $ref: '#/components/schemas/SaveArticleRequest'
       responses:
         "200":
           description: Saved
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  ok: { type: boolean }
-                  path: { type: string }
-                  html_url: { type: string }
+                $ref: '#/components/schemas/SaveArticleResponse'
 components:
+  schemas:
+    SaveArticleRequest:
+      type: object
+      required:
+        - title
+        - content
+      properties:
+        title:
+          type: string
+          description: Article title
+        content:
+          type: string
+          description: Markdown content (UTF-8)
+        slug:
+          type: string
+          description: Optional filename slug (fallback - derived from title)
+        yyyymmdd:
+          type: string
+          description: Optional date prefix like 20251217 (fallback - UTC today)
+        commit_message:
+          type: string
+          description: Optional commit message
+    SaveArticleResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        path:
+          type: string
+        html_url:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http
