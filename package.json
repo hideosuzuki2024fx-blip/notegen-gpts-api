@@ -1,0 +1,7 @@
+{
+  "name": "notegen-gpts-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Public HTTPS API for GPTs Actions to commit Markdown into GitHub.",
+  "engines": { "node": ">=18" }
+}

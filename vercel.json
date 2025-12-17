@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/openapi.yaml", "destination": "/api/openapi" },
+    { "source": "/articles", "destination": "/api/articles" }
+  ]
+}
