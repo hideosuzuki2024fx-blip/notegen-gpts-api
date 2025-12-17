@@ -3,7 +3,7 @@
   "info": {
     "title": "NoteGen GitHub API",
     "version": "1.0.0",
-    "description": "Public API for NoteGenerator GPTs to access GitHub repository content via Vercel."
+    "description": "API for NoteGenerator GPTs to list and access GitHub files via Vercel."
   },
   "servers": [
     {
@@ -19,16 +19,14 @@
           {
             "name": "path",
             "in": "query",
-            "description": "Optional subdirectory path (e.g., articles/)",
+            "description": "Optional path (e.g., articles/)",
             "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response with list of repository files",
+            "description": "Successful response with repository file list",
             "content": {
               "application/json": {
                 "schema": {
@@ -38,7 +36,6 @@
                     "properties": {
                       "name": { "type": "string" },
                       "path": { "type": "string" },
-                      "sha": { "type": "string" },
                       "type": { "type": "string" },
                       "download_url": { "type": "string" }
                     }
@@ -46,9 +43,6 @@
                 }
               }
             }
-          },
-          "500": {
-            "description": "Server error (GitHub API failure or missing token)"
           }
         }
       }
