@@ -2,8 +2,11 @@
   "name": "notegen-gpts-api",
   "private": true,
   "version": "1.0.0",
-  "description": "Public HTTPS API for GPTs Actions to commit Markdown into GitHub.",
+  "description": "Public HTTPS API for GPTsActions to commit Markdown into GitHub.",
   "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "echo 'Build complete. Provide build steps if needed.'"
+  },
   "dependencies": {
     "@octokit/rest": "^20.0.0"
   }
