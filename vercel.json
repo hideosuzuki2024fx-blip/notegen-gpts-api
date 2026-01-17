@@ -1,5 +1,6 @@
 {
-  "buildCommand": "npm run build",
+  "installCommand": "npm ci",
+  "buildCommand": "npm ci && npm run build",
   "outputDirectory": ".next",
   "rewrites": [
     { "source": "/openapi.yaml", "destination": "/api/openapi" },

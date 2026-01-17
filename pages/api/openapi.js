@@ -1,4 +1,4 @@
-module.exports = function handler(req, res) {
+export default function handler(req, res) {
   if (req.method !== "GET") {
     res.statusCode = 405;
     return res.end("Method Not Allowed");
@@ -80,4 +80,4 @@ components:
   res.setHeader("Content-Type", "text/yaml; charset=utf-8");
   res.statusCode = 200;
   res.end(yaml);
-};
+}
