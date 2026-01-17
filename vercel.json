@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "rewrites": [
+    { "source": "/openapi.yaml", "destination": "/api/openapi" },
+    { "source": "/articles", "destination": "/api/articles" },
+    { "source": "/viewer", "destination": "/photoviewer/index.html"}
+  ]
+}

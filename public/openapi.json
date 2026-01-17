@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NoteGen GitHub API",
+    "version": "1.0.0",
+    "description": "API for NoteGenerator GPTs to list and access GitHub files via Vercel."
+  },
+  "servers": [
+    {
+      "url": "https://notegen-gpts-api.vercel.app"
+    }
+  ],
+  "paths": {
+    "/api/github/list": {
+      "get": {
+        "summary": "List files in the NoteGenerator repository",
+        "operationId": "listRepoFiles",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Optional path (e.g., articles/)",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with repository file list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "path": { "type": "string" },
+                      "type": { "type": "string" },
+                      "download_url": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
