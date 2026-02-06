@@ -1,8 +1,7 @@
-
 import { Octokit } from "@octokit/rest";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 const owner = "hideosuzuki2024fx-blip";
 const repo = "NoteGenerator";
@@ -21,12 +20,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { data } = await octokit.repos.getContent({uowner, repo, path});
+    const { data } = await octokit.repos.getContent({ owner, repo, path });
     if (Array.isArray(data) || !data.sha) {
       throw new Error("path is not a file or SHA not found");
     }
 
-    const result = await octokit.repos.deleteFile({uowner, repo, path, message, sha: data.sha});
+    const result = await octokit.repos.deleteFile({ owner, repo, path, message, sha: data.sha });
 
     res.status(200).json(result.data);
   } catch (error: any) {
